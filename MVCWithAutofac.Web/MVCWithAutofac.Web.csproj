@@ -138,6 +138,9 @@
     <Compile Include="Models\ListTasks.cs" />
     <Compile Include="Models\TaskModel.cs" />
     <Compile Include="Models\TasksWithCommentsModel.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -189,7 +192,12 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <None Include="bin\MVCWithAutofac.Web.dll.config" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Debug\MVCWithAutofac.Web.csprojResolveAssemblyReference.cache" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="obj\Debug\MVCWithAutofac.Web.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\MVCWithAutofac.Web.dll" />
+    <Content Include="obj\Debug\MVCWithAutofac.Web.pdb" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
@@ -226,6 +234,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
