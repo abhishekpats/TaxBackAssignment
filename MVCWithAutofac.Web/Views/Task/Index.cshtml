@@ -1,0 +1,45 @@
+﻿@model MVCWithAutofac.Web.Models.ListTasks
+@{
+    ViewBag.Title = "List Of Tasks available in system.";
+}
+
+<h2>List of Tasks available</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Task Description</th>
+            <th>Task Status</th>
+            <th>Task Type</th>
+            <th>Created Date</th>
+            <th>Assigned To</th>
+            <th>Next Reminder Date</th>
+            <th>Task Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var task in Model.Tasks)
+        {
+            <tr>
+                <td>@task.Description</td>
+                <td>@(Model.Status.Where(x => x.Id == task.TaskStatusId).Select(x => x.Name).FirstOrDefault())</td>
+                <td>@(Model.TaskType.Where(x => x.Id.Equals(task.TaskTypeId)).Select(x => x.Name).FirstOrDefault())</td>
+                <td>@task.TaskDateCreated</td>
+                <td>@(Model.Users.Where(x => x.Id.Equals(task.TaskAssignedTo)).Select(x => x.Name).FirstOrDefault())</td>
+                <td>@task.TaskNextActionDate</td>
+                <td>@Html.ActionLink("Open Task", "TaskDetails", new { id = task.Id }, null)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<style>
+    thead,td,th,tbody 
+    {
+        border:1px solid black;
+    }
+    tr 
+    {
+        border:2px solid black;
+    }
+</style>

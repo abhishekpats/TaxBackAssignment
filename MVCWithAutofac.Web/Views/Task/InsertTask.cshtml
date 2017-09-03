@@ -1,0 +1,64 @@
+﻿@model MVCWithAutofac.Web.Models.TaskModel
+
+@{
+    ViewBag.Title = "Insert Task";
+}
+
+<h2>Insert Task</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Team</h4>
+        <hr />
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <div class="col-md-offset-1">
+                @Html.LabelFor(t => t.Task.Description)
+                @Html.EditorFor(t => t.Task.Description)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-1">
+                @Html.LabelFor(t => t.Task.TaskStatusId)
+                @Html.DropDownListFor(m => m.Task.TaskStatusId, new SelectList(Model.Status, "Id", "Name"))
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-1">
+                @Html.LabelFor(t => t.Task.TaskTypeId)
+                @Html.DropDownListFor(m => m.Task.TaskTypeId, new SelectList(Model.TaskType, "Id", "Name"))
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-1">
+                @Html.LabelFor(t => t.Task.TaskDateCreated)
+                @Html.EditorFor(t => t.Task.TaskDateCreated )
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-1">
+                @Html.LabelFor(t => t.Task.TaskAssignedTo)
+                @Html.DropDownListFor(m => m.Task.TaskAssignedTo, new SelectList(Model.Users, "Id", "Name"))
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-1">
+                @Html.LabelFor(t => t.Task.TaskNextActionDate)
+                @Html.EditorFor(t => t.Task.TaskNextActionDate)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-1">
+                <input type="submit" value="Create" class="btn btn-sm" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

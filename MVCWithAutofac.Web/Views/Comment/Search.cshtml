@@ -1,0 +1,69 @@
+﻿@model MVCWithAutofac.Web.Models.ListTasks
+@{
+    ViewBag.Title = "Search Comments in Tasks present in system.";
+}
+
+<h2>Search Comments in Tasks</h2>
+
+@if (Model != null && Model.Comments.Count > 0)
+{
+    <h6>Searched Comments List</h6>
+    <table>
+        <thead>
+            <tr>
+                <th>Comment Description</th>
+                <th>Task Reminder Date</th>
+                <th>Comment Action</th>
+                <th>Task Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var comment in Model.Comments)
+            {
+                <tr>
+                    <td>@comment.Description</td>
+                    <td>@comment.TaskReminderDate</td>
+                    <td>@Html.ActionLink("Edit Comment", "Edit", "Comment", new { id = comment.Id }, null)</td>
+                    <td>@Html.ActionLink("Open Task", "TaskDetails", "Task", new { id = comment.TaskId }, null)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Team</h4>
+        <hr />
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <div class="col-md-offset-1">
+                @Html.LabelFor(t => t.searchText)
+                @Html.EditorFor(t => t.searchText)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-1">
+                <input type="submit" value="Search" class="btn btn-sm" />
+            </div>
+        </div>
+    </div>
+}
+
+
+
+<style>
+    thead, td, th, tbody {
+        border: 1px solid black;
+    }
+
+    tr {
+        border: 2px solid black;
+    }
+</style>
+

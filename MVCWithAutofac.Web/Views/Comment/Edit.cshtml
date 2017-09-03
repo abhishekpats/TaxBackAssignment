@@ -1,0 +1,38 @@
+﻿@model MVCWithAutofac.Core.Model.Comments
+@{
+    ViewBag.Title = "To Update a Comment";
+}
+
+<h2>Edit Comment</h2>
+
+@using (Html.BeginForm("Edit", "Comment", FormMethod.Post,
+                                                     new { enctype = "multipart/form-data" }))
+{
+    <h4>Edit Comment Section</h4>
+    @Html.AntiForgeryToken()
+
+<table>
+    <thead>
+        <tr>
+            <th>Comment</th>
+            <th>Date Added</th>
+            <th>Reminder Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+            <tr>
+                <td>@Html.EditorFor(m => m.Description)</td>
+                <td>@Html.EditorFor(m => m.CommentDateAdded)</td>
+                <td>@Html.EditorFor(m => m.TaskReminderDate)</td>
+                <td>@Html.HiddenFor(m => m.TaskId)</td>
+            </tr>
+    </tbody>
+</table>
+
+<div class="form-group">
+    <div class="col-md-offset-1">
+        <input type="submit" value="Save Comment" class="btn btn-sm" />
+    </div>
+</div>
+}

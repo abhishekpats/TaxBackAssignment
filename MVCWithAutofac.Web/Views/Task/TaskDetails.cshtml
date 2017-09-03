@@ -1,0 +1,110 @@
+﻿@model MVCWithAutofac.Web.Models.TasksWithCommentsModel
+@{
+    ViewBag.Title = "Task Details";
+}
+
+<h2>Task Details</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Task Description</th>
+            <th>Task Status</th>
+            <th>Task Type</th>
+            <th>Created Date</th>
+            <th>Assigned To</th>
+            <th>Next Reminder Date</th>
+        </tr>
+    </thead>
+    <tbody>
+            <tr>
+                <td>@Model.Task.Description</td>
+                <td>@(Model.Status.Where(x => x.Id == Model.Task.TaskStatusId).Select(x => x.Name).FirstOrDefault())</td>
+                <td>@(Model.TaskType.Where(x => x.Id.Equals(Model.Task.TaskTypeId)).Select(x => x.Name).FirstOrDefault())</td>
+                <td>@Model.Task.TaskDateCreated</td>
+                <td>@(Model.Users.Where(x => x.Id.Equals(Model.Task.TaskAssignedTo)).Select(x => x.Name).FirstOrDefault())</td>
+                <td>@Model.Task.TaskNextActionDate</td>
+            </tr>
+    </tbody>
+</table>
+
+</br></br>
+
+<table>
+    <thead>
+        <tr>
+            <th>Comment</th>
+            <th>Date Added</th>
+            <th>Reminder Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var comment in Model.Comments)
+        {
+            <tr>
+                <td>@comment.Description</td>
+                <td>@comment.CommentDateAdded</td>
+                <td>@comment.TaskReminderDate</td>
+                <td>@Html.ActionLink("Edit Comment", "Edit", "Comment", new { id = comment.Id }, null)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<hr />
+@using (Html.BeginForm("Create", "Comment", FormMethod.Post,
+                                         new { enctype = "multipart/form-data" }))
+{
+    <h4>Create Comment Section</h4>
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+
+
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.LabelFor(t => t.Comment.Description)
+                    </td>
+                    <td>
+                        @Html.TextAreaFor(t => t.Comment.Description)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.HiddenFor(t => t.Comment.TaskId)
+                    </td>
+                    <td>
+                        @Html.HiddenFor(t => t.Comment.CommentDateAdded)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(t => t.Comment.TaskReminderDate)
+                    </td>
+                    <td>
+                        @Html.EditorFor(t => t.Comment.TaskReminderDate)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="form-group">
+            <div class="col-md-offset-1">
+                <input type="submit" value="Create Comment" class="btn btn-sm" />
+            </div>
+        </div>
+    </div>
+}
+
+
+<style>
+    thead, td, th, tbody {
+        border: 1px solid black;
+    }
+
+    tr {
+        border: 2px solid black;
+    }
+</style>
